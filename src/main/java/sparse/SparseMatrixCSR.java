@@ -1,4 +1,4 @@
-package sparce;
+package sparse;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-import dence.NaiveMultiplication;
-import dence.StrassenMultiplication;
-import sparce.SparseMatrixCSR;
-import sparce.SparseMultiplication;
+import dense.NaiveMultiplication;
+import dense.StrassenMultiplication;
+import sparse.SparseMatrixCSR;
+import sparse.SparseMultiplication;
 import utils.MatrixGenerator;
 
 public class Main {

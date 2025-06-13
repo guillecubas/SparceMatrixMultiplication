@@ -1,4 +1,4 @@
-package dence;
+package dense;
 
 public class LoopUnrollingMultiplication {
     public static int[][] multiply(int[][] A, int[][] B) {

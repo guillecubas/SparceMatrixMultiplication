@@ -1,4 +1,4 @@
-package dence;
+package dense;
 
 public class NaiveMultiplication {
     public static int[][] multiply(int[][] A, int[][] B) {

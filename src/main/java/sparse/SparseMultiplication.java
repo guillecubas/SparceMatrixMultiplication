@@ -1,4 +1,4 @@
-package sparce;
+package sparse;
 
 public class SparseMultiplication {
     public static SparseMatrixCSR multiply(SparseMatrixCSR A, SparseMatrixCSR B) {
