@@ -1,13 +1,17 @@
 package utils;
 
+import dence.NaiveMultiplication;
+import dence.StrassenMultiplication;
 import org.openjdk.jmh.annotations.*;
+import sparce.SparseMatrixCSR;
+import sparce.SparseMultiplication;
 
 @State(Scope.Thread)
 public class BenchmarkRunner {
     private int[][] A;
     private int[][] B;
 
-    @Param({"128", "256", "512", "1024"})
+    @Param({"128", "256", "512", "1024", "2048"})
     private int size;
 
     @Setup
