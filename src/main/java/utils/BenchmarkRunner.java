@@ -2,9 +2,12 @@ package utils;
 
 import dense.NaiveMultiplication;
 import dense.StrassenMultiplication;
-import org.openjdk.jmh.annotations.*;
+import dense.LoopUnrollingMultiplication;
 import sparse.SparseMatrixCSR;
 import sparse.SparseMultiplication;
+
+import org.openjdk.jmh.annotations.*;
+
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -12,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class BenchmarkRunner {
 
-    @Param({"128", "256", "512" , "1024"})  // Matrix sizes to benchmark
+    @Param({"128", "256", "512", "1024"})  // Matrix sizes
     private int size;
 
     @Param({"0.0", "0.5", "0.9"})  // Sparsity levels
@@ -39,6 +42,11 @@ public class BenchmarkRunner {
     @Benchmark
     public int[][] strassenMultiply() {
         return StrassenMultiplication.multiply(A, B);
+    }
+
+    @Benchmark
+    public int[][] loopUnrolledMultiply() {
+        return LoopUnrollingMultiplication.multiply(A, B);
     }
 
     @Benchmark

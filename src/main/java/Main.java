@@ -1,5 +1,6 @@
 import dense.NaiveMultiplication;
 import dense.StrassenMultiplication;
+import dense.LoopUnrollingMultiplication;
 import sparse.SparseMatrixCSR;
 import sparse.SparseMultiplication;
 import utils.MatrixGenerator;
@@ -18,6 +19,9 @@ public class Main {
         System.out.println("Running Strassen Multiplication...");
         int[][] strassenResult = StrassenMultiplication.multiply(denseA, denseB);
 
+        System.out.println("Running Loop Unrolling Multiplication...");
+        int[][] unrolledResult = LoopUnrollingMultiplication.multiply(denseA, denseB);  // ✅ NEW
+
         System.out.println("Running Sparse Multiplication (CSR)...");
         SparseMatrixCSR sparseA = new SparseMatrixCSR(denseA);
         SparseMatrixCSR sparseB = new SparseMatrixCSR(denseB);
@@ -26,4 +30,3 @@ public class Main {
         System.out.println("Benchmarks and computations completed.");
     }
 }
-
