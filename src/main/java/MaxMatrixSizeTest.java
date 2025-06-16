@@ -1,5 +1,6 @@
 import dense.NaiveMultiplication;
 import dense.StrassenMultiplication;
+import dense.LoopUnrollingMultiplication;
 import sparse.SparseMatrixCSR;
 import sparse.SparseMultiplication;
 import utils.MatrixGenerator;
@@ -10,6 +11,7 @@ public class MaxMatrixSizeTest {
         testMaxSize("Naive", false);
         testMaxSize("Strassen", false);
         testMaxSize("Sparse", true);
+        testMaxSize("LoopUnrolled", false);  // ✅ Añadido
     }
 
     private static void testMaxSize(String algorithm, boolean sparse) {
@@ -26,16 +28,23 @@ public class MaxMatrixSizeTest {
             long start = System.currentTimeMillis();
 
             try {
-                if (algorithm.equals("Naive")) {
-                    NaiveMultiplication.multiply(A, B);
-                } else if (algorithm.equals("Strassen")) {
-                    StrassenMultiplication.multiply(A, B);
-                } else if (algorithm.equals("Sparse")) {
-                    SparseMatrixCSR sa = new SparseMatrixCSR(A);
-                    SparseMatrixCSR sb = new SparseMatrixCSR(B);
-                    SparseMultiplication.multiply(sa, sb);
-                } else {
-                    throw new IllegalArgumentException("Unknown algorithm");
+                switch (algorithm) {
+                    case "Naive":
+                        NaiveMultiplication.multiply(A, B);
+                        break;
+                    case "Strassen":
+                        StrassenMultiplication.multiply(A, B);
+                        break;
+                    case "Sparse":
+                        SparseMatrixCSR sa = new SparseMatrixCSR(A);
+                        SparseMatrixCSR sb = new SparseMatrixCSR(B);
+                        SparseMultiplication.multiply(sa, sb);
+                        break;
+                    case "LoopUnrolled":
+                        LoopUnrollingMultiplication.multiply(A, B);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown algorithm: " + algorithm);
                 }
             } catch (OutOfMemoryError e) {
                 System.out.println("❌ OOM at size " + size);
